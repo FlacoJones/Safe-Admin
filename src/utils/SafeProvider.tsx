@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import connectSafe, { Safe } from './safe'
 
-const SafeContext = React.createContext<Safe|undefined>(undefined)
+const SafeContext = React.createContext<Safe | undefined>(undefined)
 
 interface Props {
     loading?: ReactNode
@@ -31,6 +31,7 @@ export const SafeProvider: React.FC<Props> = ({ loading, children }) => {
 }
 export const useSafe = (): Safe => {
     const value = React.useContext(SafeContext)
+    // eslint-disable-next-line
     if (value == undefined) {
         throw new Error('You probably forgot to put <SafeProvider>.');
     }

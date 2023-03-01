@@ -10,7 +10,7 @@ interface Props {
 const Dashboard: React.FC<Props> = () => {
     const safe = useSafe();
     const delegateRepo = useDelegateRepository()
-    const [delegates, setDelegates] = React.useState<{name: string, address: string}[]>([])
+    const [delegates, setDelegates] = React.useState<{ name: string, address: string }[]>([])
     const [newDelegateAddress, setNewDelegateAddress] = React.useState<string>("")
     const [newDelegateLabel, setNewDelegateLabel] = React.useState<string>("")
 
@@ -30,6 +30,7 @@ const Dashboard: React.FC<Props> = () => {
             console.error(e)
             console.error(e.response)
         }
+        // eslint-disable-next-line
     }, [delegateRepo, newDelegateAddress, newDelegateLabel])
 
     const removeDelegate = React.useCallback(async (delegate) => {
@@ -40,6 +41,7 @@ const Dashboard: React.FC<Props> = () => {
             console.error(e)
             console.error(e.response)
         }
+        // eslint-disable-next-line
     }, [delegateRepo])
 
     React.useEffect(() => {
@@ -49,27 +51,27 @@ const Dashboard: React.FC<Props> = () => {
 
     return <>
         {safe.getSafeInfo().safeAddress}<br />
-        <TextField 
+        <TextField
             style={{ marginTop: 10 }}
-            value={newDelegateAddress} 
-            label="Delegate Address" 
-            variant="outlined" 
+            value={newDelegateAddress}
+            label="Delegate Address"
+            variant="outlined"
             onChange={(e) => setNewDelegateAddress(e.target.value)} />
-        <TextField 
+        <TextField
             style={{ marginTop: 10 }}
-            value={newDelegateLabel} 
-            label="Delegate Label" 
-            variant="outlined" 
+            value={newDelegateLabel}
+            label="Delegate Label"
+            variant="outlined"
             onChange={(e) => setNewDelegateLabel(e.target.value)} />
-        <Button 
+        <Button
             style={{ marginTop: 10 }}
             variant="contained" color="primary"
             onClick={addDelegate}>
-                Add Delegate
+            Add Delegate
         </Button>
         <br />
         {delegates.map((d) => <p onClick={() => removeDelegate(d.address)}>{d.name} ({d.address})<br /></p>)}
     </>
 }
-  
-  export default Dashboard;
+
+export default Dashboard;

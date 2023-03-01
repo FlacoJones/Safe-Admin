@@ -8,8 +8,8 @@ import Signer, { EthereumWindowSigner } from './helpers/signer'
 
 class Singleton<T> {
     _provider: () => T
-    _cached: T|undefined
-    constructor(provider: () => T) {
+    _cached: T | undefined
+    constructor (provider: () => T) {
         this._provider = provider
     }
 
@@ -18,12 +18,12 @@ class Singleton<T> {
             this._cached = this._provider()
         }
         return this._cached
-    } 
+    }
 }
 
 class Graph {
     _safe: Safe
-    constructor(safe: Safe) {
+    constructor (safe: Safe) {
         this._safe = safe
     }
 
@@ -44,7 +44,7 @@ class Graph {
     )
 }
 
-const DependenciesContext = React.createContext<Graph|undefined>(undefined)
+const DependenciesContext = React.createContext<Graph | undefined>(undefined)
 
 export const DependenciesProvider: React.FC = ({ children }) => {
     const safe = useSafe()
@@ -61,6 +61,7 @@ export const DependenciesProvider: React.FC = ({ children }) => {
 
 const useDependency = (): Graph => {
     const value = React.useContext(DependenciesContext)
+    // eslint-disable-next-line
     if (value == undefined) {
         throw new Error('You probably forgot to put <DependenciesProvider>.');
     }
